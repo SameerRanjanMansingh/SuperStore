@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: superstore
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: superstore
+  template:
+    metadata:
+      labels:
+        app: superstore
+    spec:
+      containers:
+      - name: superstore
+        image: superstore:v1
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: superstore
+spec:
+  selector:
+    app: superstore
+  ports:
+  - port: 1234
+    targetPort: 8080
+

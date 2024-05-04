@@ -4,7 +4,7 @@ setup(
     name='src',
     packages=find_packages(),
     version='0.1.0',
-    description='predict the person's shoping intrest',
+    description='',
     author='SAMEER RANJAN MANSINGH',
     license='MIT',
 )

@@ -1,7 +1,9 @@
 SuperStore
 ==============================
 
-predict the person's shoping intrest
+The model will predict according to a location how much will be the discount of a product.
+
+So it will help to a customer as well as to the SuperStore.
 
 Project Organization
 ------------

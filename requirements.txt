@@ -1,4 +1,9 @@
 # local package
+xgboost
+scikit_learn
+boto3
+mlflow
+hyperopt
 -e .
 
 # external requirements

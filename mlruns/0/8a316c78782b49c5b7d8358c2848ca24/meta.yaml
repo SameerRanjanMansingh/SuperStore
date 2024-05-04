@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/workFiles/DS/end_to_end/Super_Store/SuperStore/mlruns/0/8a316c78782b49c5b7d8358c2848ca24/artifacts
+end_time: 1714810794236
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8a316c78782b49c5b7d8358c2848ca24
+run_name: XGBRegressor
+run_uuid: 8a316c78782b49c5b7d8358c2848ca24
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1714810583242
+status: 3
+tags: []
+user_id: samee

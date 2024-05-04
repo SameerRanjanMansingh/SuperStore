@@ -1,0 +1,27 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: superstore
+spec:
+  name: superstore
+  predictors:
+  - componentSpecs:
+    - spec:
+        containers:
+        - name: superstore
+          image: superstore:v1
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "200m"
+          ports:
+          - containerPort: 8080
+            name: http
+    graph:
+      children: []
+      endpoint:
+        type: REST
+      name: superstore
+      type: MODEL
+    name: superstore
+    replicas: 1
