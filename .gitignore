@@ -91,3 +91,13 @@ target/
 models/
 
 /models
+
+
+seldon_deployment.yaml
+seldon_iris.yaml
+seldon-gateway.yaml
+seldon-podmonitor.yaml
+
+
+test.py
+notebooks/test.ipynb
