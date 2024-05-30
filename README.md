@@ -14,7 +14,16 @@ In v1.0 I create a model which will get the discount based on required features.
 On upcoming version this model will predict another important information that is: 
     - The time required for a perticular product for delivery.
 
-Now we able to make 2 output from one model. 
+# v2.0
+This will help to know how long take your product for delivery. 
+And how much will be the discount
+
+
+## How to run
+
+- To run this file: clone it first.
+- Install all your requirements using `pip install -r requirements.txt`
+- Then run it by using `streamlit run app.py`
 
 
 -------------Thank you-------------
