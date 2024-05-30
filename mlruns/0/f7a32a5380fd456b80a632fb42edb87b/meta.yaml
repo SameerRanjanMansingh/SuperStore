@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/workFiles/DS/end_to_end/Super_Store/SuperStore/mlruns/0/f7a32a5380fd456b80a632fb42edb87b/artifacts
+end_time: 1717084685723
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f7a32a5380fd456b80a632fb42edb87b
+run_name: XGB Final Model
+run_uuid: f7a32a5380fd456b80a632fb42edb87b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1717084677726
+status: 3
+tags: []
+user_id: samee
