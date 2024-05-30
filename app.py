@@ -3,16 +3,21 @@ import streamlit as st
 import requests
 import pandas as pd
 from joblib import load
+from datetime import date
+from src.models.predict_model import get_delivery_time, get_discount, apply_threshold
 
 
 
 
-df=pd.read_csv('../data/processed/data.csv')
-raw_df=pd.read_csv('../data/raw/Sample_Superstore.csv')
+df=pd.read_csv('data/raw/Sample_Superstore.csv')
 
 
-model_path = "models/model.joblib"
-model = load(model_path)
+model_path_deliverytime = "models/deliverytime.joblib"
+model_path_discount = "models/discount.joblib"
+
+model_deliverytime = load(model_path_deliverytime)
+model_discount = load(model_path_discount)
+
 
 
 
@@ -22,25 +27,51 @@ def fetch_category(df,column_name, category):
     return df
 
 
+st.title("Online shoping")
 
 
-selected_category = st.selectbox("Type or select a Category from the dropdown", raw_df['Category'].unique())
-selected_sub_category = st.selectbox("Type or select Sub-Category from the dropdown", raw_df['Sub-Category'].unique())
-selected_product_name = st.selectbox("Type or select Product Name from the dropdown", raw_df['Product Name'].unique())
+customer_id = st.selectbox("Customer ID", df['Customer ID'].unique())
 
-selected_city = st.selectbox("Type or select your City from the dropdown", df['City'].unique())
-selected_Postal_code = st.selectbox("Type or select your Postal Code from the dropdown", df['Postal Code'].unique())
-selected_ship_mode = st.selectbox("select a Ship Mode from the dropdown", df['Ship Mode'].unique())
 
+city = st.selectbox("City", df['City'].unique())
+state = st.selectbox("State", df['State'].unique())
+region = st.selectbox("Region", df['Region'].unique())
+postal_code = st.selectbox("Postal Code", df['Postal Code'].unique())
+
+ship_mode = st.selectbox("Ship Mode", df['Ship Mode'].unique())
+segment = st.selectbox("Segment", df['Segment'].unique())
+
+
+selected_date = st.date_input("Select a date", value=date.today())
+
+category = st.selectbox("Category", df['Category'].unique())
+sub_category = st.selectbox("Sub-Category", df['Sub-Category'].unique())
+product_name = st.selectbox("Product Name", df['Product Name'].unique())
 
 quantity = st.number_input("Enter Quantity", value=None, step=1)
-cost_price = st.number_input("Enter cost price", value=None, step=1)
-before_discount = st.number_input("Price before discount", value=cost_price, step=1)
+
+if st.button('Show Result'):
+    deliverytime_data = get_delivery_time(
+        customer_id=customer_id, date=selected_date, city=city, state=state,
+        region=region, postal_code=postal_code, ship_mode=ship_mode,
+        segment=segment, category=category ,sub_category=sub_category,
+        product_name=product_name, quantity=quantity)
+
+    discount_data = get_discount(
+        customer_id=customer_id, date=selected_date, city=city, state=state,
+        region=region, postal_code=postal_code, ship_mode=ship_mode,
+        segment=segment, category=category ,sub_category=sub_category,
+        product_name=product_name, quantity=quantity)
+
+    delivery_time = model_deliverytime.predict(deliverytime_data)
+    delivery_time = apply_threshold(delivery_time)[0]
+
+    discount = model_discount.predict(discount_data)[0]
+    discount = round(float(discount), 2)
 
 
 
-
-st.write(f"Time required for delivery: {user_integer}")
-st.write(f"Your discount will be: {user_integer}")
+    st.write(f"Time required for delivery: {delivery_time} days")
+    st.write(f"Your discount will be: {discount}")
 
 
